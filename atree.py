@@ -1,36 +1,42 @@
 import random;
 
 class snode:
-    def __init__(self,maxValue=100):
+    # constructor takes parent node, and max randomised
+    # value for the node
+    def __init__(self,parent=0,maxValue=100):
         self.value=random.randint(0,maxValue);
+        self.parent=parent;
         self.children=[];
 
-    def __repr__(self):
+    def __str__(self):
         return "n"+str(self.value);
 
+    def __repr__(self):
+        return "n{} ({},{})".format(self.value,str(self.parent),len(self.children));
+
     # generate children array for this node with maximum
-    # amount of children and value
-    def genChildren(self,maxChildren,maxValue):
+    # amount of children and value, return the list of children
+    # just generated
+    def genChildren(self,maxChildren,maxValue=100):
         newchildren=[];
         for x in range(random.randint(0,maxChildren)):
-            newchildren.append(snode(maxValue));
+            newchildren.append(snode(self,maxValue));
         self.children=newchildren;
         return newchildren;
 
-def main():
-    root=snode(50);
+def genTree(maxHeight,maxChildren,maxValue):
+    root=snode(-1,50);
     nodeslist=[[root]];
 
-    for x in range(3):
+    for x in range(maxHeight):
         newNodeslist=[];
         for x in nodeslist:
             for y in x:
-                newNodeslist.append(y.genChildren(5,50));
+                newNodeslist.append(y.genChildren(maxChildren,maxValue));
 
         nodeslist=newNodeslist;
-        # print(newNodeslist);
 
-    levelPrint(root);
+    return root;
 
 def levelPrint(node):
     nodes=[[node]];
@@ -53,6 +59,9 @@ def levelPrint(node):
         newNodes=[];
         i+=1;
 
+def main():
+    root=genTree(4,3,100);
+    levelPrint(root);
 
 if __name__=="__main__":
     main();
