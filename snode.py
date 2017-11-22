@@ -11,6 +11,7 @@ class snode:
     def __str__(self):
         return "n"+str(self.value);
 
+    #advanced str representation: {node value} ({parent value},{number of children})
     def __repr__(self):
         return "n{} ({},{})".format(self.value,str(self.parent),len(self.children));
 
@@ -24,6 +25,7 @@ class snode:
         self.children=newchildren;
         return newchildren;
 
+# generate a tree with given parameters
 def genTree(maxHeight,maxChildren,maxValue):
     root=snode(-1,50);
     nodeslist=[[root]];
@@ -38,6 +40,8 @@ def genTree(maxHeight,maxChildren,maxValue):
 
     return root;
 
+#prints out a node and its children. labels each level with the initial
+#node given as level 1
 def levelPrint(node):
     nodes=[[node]];
     newNodes=[];
