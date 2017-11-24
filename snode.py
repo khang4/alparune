@@ -6,12 +6,17 @@ class snode:
     # constructor takes parent node, and max randomised
     # value for the node. if value is provided, overwrites
     # randomised value.
-    def __init__(self,parent=0,maxValue=100,value=-1):
+    def __init__(self,parent=0,maxValue=-1,value=-1):
         snode.id+=1;
         self.id=snode.id;
 
-        if value<0:
+        #neither maxvalue or value is given, node has no value
+        if maxValue<0 and value<0:
+            self.value=-1;
+        #if maxvalue is given, randomise
+        elif value<0:
             self.value=random.randint(0,maxValue);
+        #if value is given, override maxvalue
         else:
             self.value=value;
 
@@ -55,7 +60,7 @@ class snode:
         self.value=-1;
         newChildren=[];
         for x in range(amount):
-            newChildren.append(snode(self,1));
+            newChildren.append(snode(self));
 
         if len(values)==len(newChildren):
             for i,x in enumerate(values):

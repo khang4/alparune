@@ -1,16 +1,42 @@
 import snode;
 
 def main():
-    # root=snode.genTree(3,4,100);
+    root=snode.genTree(3,4,100);
 
-    # snode.levelPrint(root);
+    snode.levelPrint(root);
 
-    # print(alpharecurse(root,0,100));
+    print(alpharecurse(root,0,100));
 
+def treerecurseTest1():
+    newchildren=[];
     bob=snode.snode(value=10);
-    bob.addChilden(3,[0,1,5]);
+    newchildren.append(bob.addChilden(2));
+
+    newchildren.append(newchildren[0][0].addChilden(2));
+    newchildren.append(newchildren[0][1].addChilden(2));
+
+    newchildren.append(newchildren[1][0].addChilden(2));
+    newchildren.append(newchildren[1][1].addChilden(3));
+
+    newchildren[2][0].value=9
+
+    newchildren.append(newchildren[2][1].addChilden(2));
+
+    newchildren[3][0].value=10;
+    newchildren[3][0].value=13;
+    newchildren[4][0].value=8;
+    newchildren[4][2].value=2;
+    newchildren[5][0].value=5;
+    newchildren[5][1].value=6;
+
+    newchildren.append(newchildren[4][1].addChilden(1));
+
+    newchildren[6][0].value=17;
+
 
     snode.levelPrint(bob);
+
+    print(alpharecurse(bob,0,20));
 
 #give maxValue as the max value given to genTree
 # mode: 0=maximise,1=minimise
