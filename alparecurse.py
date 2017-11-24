@@ -5,7 +5,8 @@ def main():
 
     snode.levelPrint(root);
 
-    print(alpharecurse(root,0,100));
+    print(minmaxRecurse(root,0,100));
+    print(alphaRecurse(root,0,100));
 
 def treerecurseTest1():
     newchildren=[];
@@ -36,11 +37,12 @@ def treerecurseTest1():
 
     snode.levelPrint(bob);
 
-    print(alpharecurse(bob,0,20));
+    print(minmaxRecurse(bob,0,20));
+    print(alphaRecurse(bob,0,20,-1,20));
 
 #give maxValue as the max value given to genTree
 # mode: 0=maximise,1=minimise
-def alpharecurse(node,mode,maxValue):
+def minmaxRecurse(node,mode,maxValue):
     if len(node.children)==0:
         return node.value;
 
@@ -55,7 +57,7 @@ def alpharecurse(node,mode,maxValue):
         minmax=maxValue;
 
     for x in node.children:
-        childValue=alpharecurse(x,mode,maxValue);
+        childValue=minmaxRecurse(x,mode,maxValue);
 
         #minimise mode (mode was switched)
         if not mode:
@@ -63,6 +65,42 @@ def alpharecurse(node,mode,maxValue):
 
         else:
             minmax=max(minmax,childValue);
+
+    return minmax;
+
+#alpha should be initially set to -1, and beta should never be negative,
+#except at the beginning, where it immediately gets set to the maxValue
+def alphaRecurse(node,mode,maxValue,alpha=-1,beta=-1):
+    if beta<0:
+        beta=maxValue;
+
+    if len(node.children)==0:
+        return node.value;
+
+    # maximise mode, find largest value from children
+    if not mode:
+        mode=1;
+        minmax=-1;
+
+    #minimise mode, find smallest value from children
+    else:
+        mode=0;
+        minmax=maxValue;
+
+    for x in node.children:
+        childValue=alphaRecurse(x,mode,maxValue,alpha,beta);
+
+        #minimise mode (mode was switched)
+        if not mode:
+            minmax=min(minmax,childValue);
+            beta=min(minmax,beta);
+
+        else:
+            minmax=max(minmax,childValue);
+            alpha=max(alpha,minmax);
+
+        if beta<=alpha:
+            break;
 
     return minmax;
 
