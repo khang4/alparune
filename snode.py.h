@@ -1,9 +1,15 @@
 class snode
 {
   public:
-    snode(snode parent,int maxValue);
+    snode(snode parent,int maxValue,int value);
+
+    int id;
+    int value;
+    snode parent;
+    snode-array children;
 
     snode-array genChildren(int maxChildren,int maxValue);
+    snode-array addChildren(int amount,int-array values);
 
   private:
     string __str__;

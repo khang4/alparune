@@ -4,11 +4,17 @@ class snode:
     id=0;
 
     # constructor takes parent node, and max randomised
-    # value for the node
-    def __init__(self,parent=0,maxValue=100):
+    # value for the node. if value is provided, overwrites
+    # randomised value.
+    def __init__(self,parent=0,maxValue=100,value=-1):
         snode.id+=1;
         self.id=snode.id;
-        self.value=random.randint(0,maxValue);
+
+        if value<0:
+            self.value=random.randint(0,maxValue);
+        else:
+            self.value=value;
+
         self.parent=parent;
         self.children=[];
 
@@ -32,7 +38,7 @@ class snode:
     # generate children array for this node with maximum
     # amount of children and value, return the list of children
     # just generated
-    def genChildren(self,maxChildren,maxValue=100):
+    def genChildren(self,maxChildren=5,maxValue=100):
         newchildren=[];
         for x in range(random.randint(0,maxChildren)):
             newchildren.append(snode(self,maxValue));
@@ -43,7 +49,27 @@ class snode:
 
         return newchildren;
 
-# generate a tree with given parameters
+    #add a certain amount of children, if an array of values its
+    #provided, sets those children to those values
+    def addChilden(self,amount=1,values=[]):
+        self.value=-1;
+        newChildren=[];
+        for x in range(amount):
+            newChildren.append(snode(self,1));
+
+        if len(values)==len(newChildren):
+            for i,x in enumerate(values):
+                newChildren[i].value=x;
+
+        for x in newChildren:
+            self.children.append(x);
+
+        return newChildren;
+
+#generate a tree with given parameters
+#maxheight=how high the tree can go
+#maxchildren=max range to generate children between
+#maxvalue=max random value a leaf node can have
 def genTree(maxHeight,maxChildren,maxValue):
     root=snode(-1,50);
     nodeslist=[[root]];
