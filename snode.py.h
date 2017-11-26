@@ -19,6 +19,7 @@ class snode
     string __repr__;
 };
 
-snode genTree(int maxHeight,int minChildren,int maxChildren,int maxValue);
+//progressprint is optional, defaults to 0
+snode genTree(int maxHeight,int minChildren,int maxChildren,int maxValue,(int progressPrint));
 
 void levelPrint(snode node);

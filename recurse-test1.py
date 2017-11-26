@@ -3,11 +3,12 @@ import snode;
 import timeit;
 
 def main():
-    maxHeight=8;
-    minChildren=4;
-    maxChildren=8;
+    maxHeight=6;
+    minChildren=6;
+    maxChildren=15;
     maxValue=100;
-    tree=snode.genTree(maxHeight,minChildren,maxChildren,maxValue);
+    gentreeProgress=1;
+    tree=snode.genTree(maxHeight,minChildren,maxChildren,maxValue,gentreeProgress);
 
     # snode.levelPrint(tree);
     print("nodes generated: ",snode.snode.id);

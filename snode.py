@@ -79,13 +79,28 @@ class snode:
 #maxheight=how high the tree can go
 #maxchildren=max range to generate children between
 #maxvalue=max random value a leaf node can have
-def genTree(maxHeight,minChildren,maxChildren,maxValue):
+#give it statusPrint=1 to print out stuff (so you dont get bored while its making a tree)
+#<level>: <nodes created>/<total nodes for this level>
+def genTree(maxHeight,minChildren,maxChildren,maxValue,progressPrint=0):
     root=snode(-1,50);
     nodeslist=[[root]];
 
-    for x in range(maxHeight):
+    nodeslistLen=len(nodeslist);
+    endMode="\r";
+
+    for z in range(maxHeight):
         newNodeslist=[];
-        for x in nodeslist:
+
+        nodeslistLen=len(nodeslist);
+        endMode="\r";
+
+        for ix,x in enumerate(nodeslist):
+            if progressPrint:
+                if ix==nodeslistLen-1:
+                    endMode="\n";
+
+                print("{}: {}/{}".format(z+1,ix+1,nodeslistLen),end=endMode,flush=True);
+
             for y in x:
                 newNodeslist.append(y.genChildren(minChildren,maxChildren,maxValue));
 
