@@ -2,6 +2,7 @@ import random;
 
 class snode:
     id=0;
+    leafs=1;
 
     # constructor takes parent node, and max randomised
     # value for the node. if value is provided, overwrites
@@ -49,9 +50,12 @@ class snode:
             newchildren.append(snode(self,maxValue));
         self.children=newchildren;
 
+        #no longer a leaf node
         if len(newchildren)>0:
             self.value=-1;
+            snode.leafs-=1;
 
+        snode.leafs+=len(newchildren);
         return newchildren;
 
     #add a certain amount of children, if an array of values its

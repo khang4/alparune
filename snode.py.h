@@ -1,5 +1,8 @@
 class snode
 {
+    static int id; //running id count for nodes, can be used as total number of nodes
+    static int leafs; //number of leaf nodes
+
   public:
     snode(snode parent,int maxValue,int value);
 
