@@ -3,9 +3,9 @@ import snode;
 import timeit;
 
 def main():
-    maxHeight=6;
-    minChildren=6;
-    maxChildren=15;
+    maxHeight=10;
+    minChildren=1;
+    maxChildren=5;
     maxValue=100;
     gentreeProgress=1;
     tree=snode.genTree(maxHeight,minChildren,maxChildren,maxValue,gentreeProgress);
