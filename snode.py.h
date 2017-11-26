@@ -16,6 +16,6 @@ class snode
     string __repr__;
 };
 
-snode genTree(int maxHeight,int maxChildren,int maxValue);
+snode genTree(int maxHeight,int minChildren,int maxChildren,int maxValue);
 
 void levelPrint(snode node);

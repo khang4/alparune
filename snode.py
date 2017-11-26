@@ -43,9 +43,9 @@ class snode:
     # generate children array for this node with maximum
     # amount of children and value, return the list of children
     # just generated
-    def genChildren(self,maxChildren=5,maxValue=100):
+    def genChildren(self,minChildren=0,maxChildren=5,maxValue=100):
         newchildren=[];
-        for x in range(random.randint(0,maxChildren)):
+        for x in range(random.randint(minChildren,maxChildren)):
             newchildren.append(snode(self,maxValue));
         self.children=newchildren;
 
@@ -75,7 +75,7 @@ class snode:
 #maxheight=how high the tree can go
 #maxchildren=max range to generate children between
 #maxvalue=max random value a leaf node can have
-def genTree(maxHeight,maxChildren,maxValue):
+def genTree(maxHeight,minChildren,maxChildren,maxValue):
     root=snode(-1,50);
     nodeslist=[[root]];
 
@@ -83,7 +83,7 @@ def genTree(maxHeight,maxChildren,maxValue):
         newNodeslist=[];
         for x in nodeslist:
             for y in x:
-                newNodeslist.append(y.genChildren(maxChildren,maxValue));
+                newNodeslist.append(y.genChildren(minChildren,maxChildren,maxValue));
 
         nodeslist=newNodeslist;
 
