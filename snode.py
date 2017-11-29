@@ -60,18 +60,23 @@ class snode:
 
     #add a certain amount of children, if an array of values its
     #provided, sets those children to those values
-    def addChilden(self,amount=1,values=[]):
-        self.value=-1;
+    def addChildren(self,amount=1,values=[],*,maxValue=2):
+        self.value=-1; #no longer a leaf, remove the value
         newChildren=[];
         for x in range(amount):
-            newChildren.append(snode(self));
+            newChildren.append(snode(self,maxValue));
 
         if len(values)==len(newChildren):
             for i,x in enumerate(values):
                 newChildren[i].value=x;
 
-        for x in newChildren:
-            self.children.append(x);
+        #(optimisation) if no children, just set it
+        if len(self.children)==0:
+            self.children=newChildren;
+
+        else:
+            for x in newChildren:
+                self.children.append(x);
 
         return newChildren;
 
@@ -82,7 +87,7 @@ class snode:
 #give it statusPrint=1 to print out stuff (so you dont get bored while its making a tree)
 #<level>: <nodes created>/<total nodes for this level>
 def genTree(maxHeight,minChildren,maxChildren,maxValue,progressPrint=0):
-    root=snode(-1,50);
+    root=snode(-1,maxValue);
     nodeslist=[[root]];
 
     nodeslistLen=len(nodeslist);
@@ -108,6 +113,32 @@ def genTree(maxHeight,minChildren,maxChildren,maxValue,progressPrint=0):
 
     return root;
 
+#gen a tree given number of nodes instead of height. generates a random number of nodes
+#between the specified range.
+def genGraphTree(minNodes,maxNodes,minChildren,maxChildren,maxValue,progressPrint=0):
+    root=snode(-1,maxValue);
+    nodes=[[root]];
+    numNodes=random.randint(minNodes,maxNodes);
+
+    while 1:
+        newNodes=[];
+        for x in nodes:
+            for y in x:
+                appendNodes=random.randint(minChildren,maxChildren);
+
+                if appendNodes>numNodes:
+                    appendNodes=numNodes;
+
+                newNodes.append(y.addChildren(appendNodes,maxValue=maxValue));
+
+                numNodes-=appendNodes;
+                completed+=appendNodes;
+
+                if numNodes<=0:
+                    return root;
+        nodes=newNodes;
+
+
 #prints out a node and its children. labels each level with the initial
 #node given as level 1
 def levelPrint(node):
@@ -132,7 +163,8 @@ def levelPrint(node):
         i+=1;
 
 def main():
-    root=genTree(4,3,100);
+    # root=genTree(4,1,3,100,1);
+    root=genGraphTree(10,15,1,3,100,1);
     levelPrint(root);
 
 if __name__=="__main__":
