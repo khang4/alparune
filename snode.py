@@ -120,6 +120,9 @@ def genGraphTree(minNodes,maxNodes,minChildren,maxChildren,maxValue,progressPrin
     nodes=[[root]];
     numNodes=random.randint(minNodes,maxNodes);
 
+    totalNodes=numNodes;
+    completedNodes=0;
+
     while 1:
         newNodes=[];
         for x in nodes:
@@ -132,10 +135,16 @@ def genGraphTree(minNodes,maxNodes,minChildren,maxChildren,maxValue,progressPrin
                 newNodes.append(y.addChildren(appendNodes,maxValue=maxValue));
 
                 numNodes-=appendNodes;
-                completed+=appendNodes;
+
+                if progressPrint:
+                    completedNodes+=appendNodes;
+                    print("{}/{}".format(completedNodes,totalNodes),end="\r",flush=True);
 
                 if numNodes<=0:
+                    if progressPrint:
+                        print();
                     return root;
+
         nodes=newNodes;
 
 
@@ -164,8 +173,9 @@ def levelPrint(node):
 
 def main():
     # root=genTree(4,1,3,100,1);
-    root=genGraphTree(10,15,1,3,100,1);
-    levelPrint(root);
+    root=genGraphTree(40000,50000,8,10,100,1);
+    print(root)
+    # levelPrint(root);
 
 if __name__=="__main__":
     main();

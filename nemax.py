@@ -49,9 +49,10 @@ def nescout(node,mode,maxValue,alpha=None,beta=None):
     return alpha;
 
 def main():
-    root=snode.genTree(3,1,5,100,1);
+    # root=snode.genTree(3,1,5,100,1);
+    root=snode.genGraphTree(45000,45000,5,10,100,0);
 
-    snode.levelPrint(root);
+    # snode.levelPrint(root);
 
     print(alparecurse.minmaxRecurse(root,0,100));
     print(alparecurse.alphaRecurse(root,0,100));
