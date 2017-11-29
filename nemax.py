@@ -1,5 +1,5 @@
 import snode;
-import alparecurse;
+import mmax;
 
 #to start, give it:
 #node=root node
@@ -54,8 +54,8 @@ def main():
 
     # snode.levelPrint(root);
 
-    print(alparecurse.minmaxRecurse(root,0,100));
-    print(alparecurse.alphaRecurse(root,0,100));
+    print(mmax.mmax(root,0,100));
+    print(mmax.alphaMax(root,0,100));
     print(nemax(root,1,100));
     print(nescout(root,1,100));
 

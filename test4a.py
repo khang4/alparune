@@ -3,7 +3,7 @@
 #fixed: height, value
 #measure: time
 
-import alparecurse;
+import mmax;
 import nemax;
 import snode;
 import timeit;
@@ -25,11 +25,11 @@ def main():
             times=[0,0,0,0];
 
             times[0]=timeit.default_timer();
-            alparecurse.minmaxRecurse(tree,0,maxValue);
+            mmax.mmax(tree,0,maxValue);
             times[0]=timeit.default_timer()-times[0];
 
             times[1]=timeit.default_timer();
-            alparecurse.alphaRecurse(tree,0,maxValue);
+            mmax.alphaMax(tree,0,maxValue);
             times[1]=timeit.default_timer()-times[1];
 
             times[2]=timeit.default_timer();

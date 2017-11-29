@@ -3,7 +3,7 @@
 #fixed: children, value
 #measure: time
 
-import alparecurse;
+import mmax;
 import snode;
 import timeit;
 
@@ -19,7 +19,7 @@ def main():
         tree=snode.genTree(x,minChildren,maxChildren,maxValue,gentreeProgress);
 
         starttime=timeit.default_timer();
-        res=alparecurse.alphaRecurse(tree,0,maxValue);
+        res=mmax.alphaMax(tree,0,maxValue);
         endtime=timeit.default_timer()-starttime;
 
         ofile.write("{} {}\n".format(x,endtime));

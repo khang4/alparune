@@ -1,28 +1,28 @@
-#test3 height, high density
-#vary: height
-#fixed: children, value
+#test2 density, fixed height
+#vary: children
+#fixed: height, value
 #measure: time
 
-import alparecurse;
+import mmax;
 import snode;
 import timeit;
 
 def main():
     maxHeight=5;
-    minChildren=8;
-    maxChildren=10;
+    minChildren=1;
+    maxChildren=5;
     maxValue=100;
     gentreeProgress=1;
 
-    ofile=open("test3.txt","a");
+    ofile=open("test2.txt","a");
 
-    for x in range(8,11):
-        maxHeight=x;
+    for x in range(45,48):
+        maxChildren=x;
         print("-- {} --".format(x));
         tree=snode.genTree(maxHeight,minChildren,maxChildren,maxValue,gentreeProgress);
 
         starttime=timeit.default_timer();
-        res=alparecurse.alphaRecurse(tree,0,maxValue);
+        res=mmax.alphaMax(tree,0,maxValue);
         endtime=timeit.default_timer()-starttime;
 
         del tree;
