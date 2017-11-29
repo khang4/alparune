@@ -23,6 +23,31 @@ def nemax(node,mode,maxValue,alpha=None,beta=None):
 
     return childMax;
 
+def nescout(node,mode,maxValue,alpha=None,beta=None):
+    if alpha==None or beta==None:
+        alpha=-maxValue;
+        beta=maxValue;
+
+    if len(node.children)==0:
+        return mode*node.value;
+
+    firstChild=1;
+    for x in node.children:
+        if firstChild:
+            firstChild=0;
+            alpha=max(alpha,-nescout(x,-mode,maxValue,-beta,-alpha));
+
+        else:
+            childValue=-nescout(x,-mode,maxValue,-(alpha+1),-alpha);
+            if alpha<childValue and childValue<beta:
+                childValue=-nescout(x,-mode,maxValue,-beta,-childValue);
+            alpha=max(alpha,childValue);
+
+        if alpha>=beta:
+            break;
+
+    return alpha;
+
 def main():
     root=snode.genTree(3,1,5,100,1);
 
@@ -31,6 +56,7 @@ def main():
     print(alparecurse.minmaxRecurse(root,0,100));
     print(alparecurse.alphaRecurse(root,0,100));
     print(nemax(root,1,100));
+    print(nescout(root,1,100));
 
 if __name__=="__main__":
     main();
