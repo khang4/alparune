@@ -19,16 +19,18 @@ def main():
 
     filename="test4.txt";
 
-    for x in range(10,16):
+    for x in range(25,26):
         with open(filename,"a") as ofile:
+            #put things that change here:
             minChildren=x;
             maxChildren=minChildren+2;
+            #--------
 
+            print("-- {} --".format(x));
             tree=snode.genTree(maxHeight,minChildren,maxChildren,maxValue,gentreeProgress);
             # tree=snode.genGraphTree(minNodes,maxNodes,minChildren,maxChildren,maxValue,gentreeProgress);
 
             #DONT CHANGE ANYTHING BELOW HERE!!!!
-            print("-- {} --".format(x));
             times=[0,0,0,0];
 
             times[0]=timeit.default_timer();
