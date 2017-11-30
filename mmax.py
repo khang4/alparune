@@ -1,5 +1,7 @@
 import snode;
 
+alphaBreak=0;
+
 #alpha should be initially set to -1, and beta should never be negative,
 #except at the beginning, where it immediately gets set to the maxValue
 #maxValue needs to be given and needs to match the maxvalue used to
@@ -35,6 +37,8 @@ def alphaMax(node,mode,maxValue,alpha=-1,beta=-1):
             alpha=max(alpha,minmax);
 
         if beta<=alpha:
+            global alphaBreak;
+            alphaBreak+=1;
             break;
 
     return minmax;

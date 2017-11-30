@@ -1,6 +1,8 @@
 import snode;
 import mmax;
 
+nescoutBreak=0;
+
 #to start, give it:
 #node=root node
 #mode=1 for maximise, -1 for minimise
@@ -44,6 +46,8 @@ def nescout(node,mode,maxValue,alpha=None,beta=None):
             alpha=max(alpha,childValue);
 
         if alpha>=beta:
+            global nescoutBreak;
+            nescoutBreak+=1;
             break;
 
     return alpha;
